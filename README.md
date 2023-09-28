@@ -1,5 +1,8 @@
-<!-- vim: colorcolumn=80 filetype=markdown
+<!-- vim: filetype=markdown colorcolumn=80 softtabstop=4 shiftwidth=4 tabstop=4 expandtab:
 -->
+
+<img src="spire-helm.svg" align="right" style="width: 30%; height: auto;" />
+
 > **Note**: All the helm charts in this repo are beta. We encourage you to try them out and contribute. The API may change as we move towards a production ready release.
 
 # helm-charts-flex
