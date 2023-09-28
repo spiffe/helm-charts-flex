@@ -1,3 +1,5 @@
+<!-- vim: colorcolumn=80 filetype=markdown
+-->
 > **Note**: All the helm charts in this repo are beta. We encourage you to try them out and contribute. The API may change as we move towards a production ready release.
 
 # helm-charts-flex
