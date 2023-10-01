@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $.Release.Name }}-agent-config
+  namespace: {{ $.Release.Namespace }}
+data:
+  agent_config: |
+    agent {
+    }
+    
+    plugins {
+    }
+    {{ if or ( or (not .Values.agent) ( or (not .Values.agent.healthChecks) (not .Values.agent.healthChecks.enable) ) ) (ne .Values.agent.healthChecks.enable false) }} 
+    health_checks {
+    }
+    {{- end }}

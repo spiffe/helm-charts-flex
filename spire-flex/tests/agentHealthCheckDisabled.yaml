@@ -1,0 +1,28 @@
+suite: test .agent.healthCheck.enabled true
+set:
+  agent: 
+    healthChecks:
+      enabled: true
+templates:
+  - agent-configmap.yaml
+tests:
+  - it: should work
+    set:
+      agent.healthChecks.enaled: true
+    asserts:
+      - containsDocument:
+          apiVersion: "v1"
+          kind: "ConfigMap"
+          name: "RELEASE-NAME-agent-config"
+          namespace: "NAMESPACE"
+      - equal:
+          path: data.agent_config
+          value: |
+            agent {
+            }
+            
+            plugins {
+            }
+
+            health_checks {
+            }
