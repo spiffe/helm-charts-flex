@@ -1,14 +1,10 @@
 suite: test .agent.healthCheck.enable true
-set:
-  agent:
-    healthChecks:
-      enable: true
 templates:
   - agent-configmap.yaml
 tests:
   - it: should work
     set:
-      agent.healthChecks.enable: true
+      agent.healthCheck.enable: true
     asserts:
       - containsDocument:
           apiVersion: "v1"
@@ -26,4 +22,8 @@ tests:
 
             health_checks {
               listener_enabled = true
+              bind_address = "0.0.0.0"
+              bind_port = 8080
+              live_path = "/live"
+              ready_path = "/ready"
             }

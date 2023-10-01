@@ -1,10 +1,12 @@
-suite: test .agent.healthCheck.enable false
+suite: test .agent.healthCheck.livePath /i_am_alive
+set:
+  Release.Name: devcluster
 templates:
   - agent-configmap.yaml
 tests:
   - it: should work
     set:
-      agent.healthCheck.enable: false
+      agent.healthCheck.livePath: "/i_am_alive"
     asserts:
       - containsDocument:
           apiVersion: "v1"
@@ -18,4 +20,12 @@ tests:
             }
             
             plugins {
+            }
+            
+            health_checks {
+              listener_enabled = true
+              bind_address = "0.0.0.0"
+              bind_port = 8080
+              live_path = "/i_am_alive"
+              ready_path = "/ready"
             }
