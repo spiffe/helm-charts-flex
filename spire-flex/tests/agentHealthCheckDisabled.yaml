@@ -1,14 +1,14 @@
-suite: test .agent.healthCheck.enabled true
+suite: test .agent.healthCheck.enable false
 set:
   agent: 
     healthChecks:
-      enabled: true
+      enable: false
 templates:
   - agent-configmap.yaml
 tests:
   - it: should work
     set:
-      agent.healthChecks.enaled: true
+      agent.healthChecks.enable: false
     asserts:
       - containsDocument:
           apiVersion: "v1"
@@ -22,7 +22,4 @@ tests:
             }
             
             plugins {
-            }
-
-            health_checks {
             }

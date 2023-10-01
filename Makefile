@@ -1,5 +1,8 @@
 mkfile_path := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
+.PHONY: check
+check: test
+
 test:
 	docker run -ti --rm -v $(mkfile_path):/apps docker://helmunittest/helm-unittest:3.11.1-0.3.0 spire-flex/  -f tests/*.yaml
 

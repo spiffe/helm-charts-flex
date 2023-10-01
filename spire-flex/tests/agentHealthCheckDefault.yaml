@@ -1,4 +1,4 @@
-suite: test .agent.healthCheck.enabled default
+suite: test .agent.healthCheck.enable default
 set:
   Release.Name: devcluster
 templates:
@@ -21,4 +21,5 @@ tests:
             }
             
             health_checks {
+              listener_enabled = true
             }

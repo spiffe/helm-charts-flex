@@ -10,7 +10,8 @@ data:
     
     plugins {
     }
-    {{ if or ( or (not .Values.agent) ( or (not .Values.agent.healthChecks) (not .Values.agent.healthChecks.enable) ) ) (ne .Values.agent.healthChecks.enable false) }} 
+    {{ if ne (((.Values.agent).healthChecks).enable) false }}
     health_checks {
+      listener_enabled = true
     }
     {{- end }}
