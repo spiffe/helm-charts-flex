@@ -13,8 +13,8 @@ data:
     {{ if ne (((.Values.agent).healthCheck).enable) false }}
     health_checks {
       listener_enabled = true
-      bind_address = {{ default "0.0.0.0" (((.Values.agent).healthCheck).bindAddress) | quote }}
-      bind_port = {{ default 8080 (((.Values.agent).healthCheck).bindPort) }}
+      bind_address = {{ default "localhost" (((.Values.agent).healthCheck).bindAddress) | quote }}
+      bind_port = {{ default 80 (((.Values.agent).healthCheck).bindPort) }}
       live_path = {{ default "/live" (((.Values.agent).healthCheck).livePath) | quote }}
       ready_path = {{ default "/ready" (((.Values.agent).healthCheck).readyPath) | quote }}
     }

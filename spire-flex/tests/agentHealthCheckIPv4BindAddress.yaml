@@ -25,7 +25,7 @@ tests:
             health_checks {
               listener_enabled = true
               bind_address = "192.168.0.23"
-              bind_port = 8080
+              bind_port = 80
               live_path = "/live"
               ready_path = "/ready"
             }
