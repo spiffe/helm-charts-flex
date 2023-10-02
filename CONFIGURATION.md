@@ -24,6 +24,9 @@ The values associated with the agent health checks include
 | agent.healthCheck.livePath    | string | "/live"     |
 | agent.healthCheck.readyPath   | string | "/ready"    |
 
+> Note: The livePath indicates if the agent has died.
+> While the readyPath indicates if the agent is capable of processing requests.
+
 One may override one or more of these values by setting them in the values.yaml
 file or in the "set" command line interfaces associated with your deployment.
 
