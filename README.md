@@ -41,13 +41,13 @@ coordinating the other clusters.
 To install a cluster named "spire-demo" with a trust domain of "demo.trust.domain"
 
 ```bash
-$ helm install spire-demo spire-0.1.0.tgz --set trustDoman=demo.company.com
+$ helm install spire-demo spire-flex-0.1.0.tgz --set trustDoman=demo.company.com
 ``` 
 
 or the preferred approach of putting the values in a values.yaml file
 
 ```bash
-$ helm install spire-demo spire-0.1.0.tgz --file values.yaml
+$ helm install spire-demo spire-flex-0.1.0.tgz --file values.yaml
 ```
 
 We recommend that you replace the values "spire-demo" and "demo.trust.domain"
@@ -61,17 +61,17 @@ To install a tiered cluster setup, one must install one coordnating "root" clust
 and one or more "nested" clusters.
 
 ```bash
-$ helm install spire-demo-root spire-0.1.0.tgz --set trustDoman=demo.company.com --set type=root
-$ helm install spire-demo-nested1 spire-0.1.0.tgz --set trustDoman=demo.company.com --set type=nested
-$ helm install spire-demo-nested2 spire-0.1.0.tgz --set trustDoman=demo.company.com --set type=nested
+$ helm install spire-demo-root spire-flex-0.1.0.tgz --set trustDoman=demo.company.com --set type=root
+$ helm install spire-demo-nested1 spire-flex-0.1.0.tgz --set trustDoman=demo.company.com --set type=nested
+$ helm install spire-demo-nested2 spire-flex-0.1.0.tgz --set trustDoman=demo.company.com --set type=nested
 ``` 
 
 or the preferred approach of putting the values in a values.yaml file
 
 ```bash
-$ helm install spire-demo-root spire-0.1.0.tgz --file spire-root.yaml
-$ helm install spire-demo-nested1 spire-0.1.0.tgz --file spire-nested1.yaml
-$ helm install spire-demo-nested2 spire-0.1.0.tgz --file spire-nested2.yaml
+$ helm install spire-demo-root spire-flex-0.1.0.tgz --file spire-root.yaml
+$ helm install spire-demo-nested1 spire-flex-0.1.0.tgz --file spire-nested1.yaml
+$ helm install spire-demo-nested2 spire-flex-0.1.0.tgz --file spire-nested2.yaml
 ```
 
 We recommend that you replace the values "spire-demo-root", "spire-demo-nested1",
@@ -93,13 +93,13 @@ To change values in an already deployed cluster, one uses the helm upgrade
 command with the new values.
 
 ```bash
-$ helm upgrade spire-demo spire-0.1.0.tgz --set trustDomain=dev.company.com
+$ helm upgrade spire-demo spire-flex-0.1.0.tgz --set trustDomain=dev.company.com
 ```
 
 or the preferred approach of putting the values in a values.yaml file
 
 ```bash
-$ helm upgrade spire-demo spire-0.1.0.tgz --file values.yaml
+$ helm upgrade spire-demo spire-flex-0.1.0.tgz --file values.yaml
 ```
 
 after the values.yaml file has been updated.
@@ -108,17 +108,17 @@ We recommend keeping the values.yaml file under source code control.
 
 ## Upgrades
 
-To upgrade the deployed spire cluster from release spire-0.1.0 to release       
-spire-0.2.0                                                                     
+To upgrade the deployed spire cluster from release spire-flex-0.1.0 to release       
+spire-flex-0.2.0                                                                     
                                                                                 
 ``` bash                                                                        
-$ helm upgrade spire-demo spire-0.2.0.tgz --reuse-values                        
+$ helm upgrade spire-demo spire-flex-0.2.0.tgz --reuse-values                        
 ```                                                                             
                                                                                 
 or if you want to pass explicit values to the chart                             
                                                                                 
 ```bash                                                                         
-$ helm upgrade spire-demo spire-0.2.0.tgz --file values.yaml                    
+$ helm upgrade spire-demo spire-flex-0.2.0.tgz --file values.yaml                    
 ```                                                                             
                                                                                 
 Upgrades are supported from any minor version to the next minor version.  Upgrades
