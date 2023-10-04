@@ -11,7 +11,7 @@ template:
 
 test:
 	$(container_cmd) run -ti --rm -v $(mkfile_path):/apps docker://alpine/helm:3.11.1 lint spire-flex -f spire-flex/values.yaml
-	$(container_cmd) run -ti --rm -v $(mkfile_path):/apps docker://helmunittest/helm-unittest:3.11.1-0.3.0 spire-flex/  -f tests/*.yaml
+	$(container_cmd) run -ti --rm -v $(mkfile_path):/apps docker://helmunittest/helm-unittest:3.11.1-0.3.0 spire-flex/ -d -f tests/*.yaml
 
 helm-version:
 	$(container_cmd) run -ti --rm -v $(mkfile_path):/apps docker://alpine/helm:3.11.1 version
