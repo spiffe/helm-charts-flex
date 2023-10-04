@@ -1,4 +1,4 @@
-suite: test .agent.healthCheck.bindAddress 2345:0425:2CA1::0567:5673:23b5
+suite: test .agent.healthCheck.bindAddress ::1
 set:
   Release.Name: devcluster
 templates:
@@ -8,7 +8,7 @@ tests:
   - it: "Should render the correct agent_config file"
     template: agent-configmap.yaml
     set:
-      agent.healthCheck.bindAddress: "2345:0425:2CA1::0567:5673:23b5"
+      agent.healthCheck.bindAddress: "::1"
     asserts:
       - containsDocument:
           apiVersion: "v1"
@@ -26,7 +26,7 @@ tests:
             
             health_checks {
               listener_enabled = true
-              bind_address = "2345:0425:2CA1::0567:5673:23b5"
+              bind_address = "::1"
               bind_port = 80
               live_path = "/live"
               ready_path = "/ready"
@@ -35,7 +35,7 @@ tests:
   - it: "Expressed settings should correspond to agent daemonset probes"
     template: agent-daemonset.yaml
     set:
-      agent.healthCheck.bindAddress: "2345:0425:2CA1::0567:5673:23b5"
+      agent.healthCheck.bindAddress: "::1"
     asserts:
       - containsDocument:
           apiVersion: "apps/v1"
@@ -51,53 +51,53 @@ tests:
       - isNotNull:
           path: spec.template.spec.containers
       - isNotNull:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent-container")].readinessProbe
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].readinessProbe
       - isNotNull:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent-container")].readinessProbe.httpGet
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].readinessProbe.httpGet
       - isNotNull:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent-container")].readinessProbe.httpGet.host
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].readinessProbe.httpGet.host
       - equal:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent-container")].readinessProbe.httpGet.host
-          value: "2345:0425:2CA1::0567:5673:23b5"
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].readinessProbe.httpGet.host
+          value: "::1"
       - isNotNull:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent-container")].readinessProbe.httpGet.path
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].readinessProbe.httpGet.path
       - equal:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent-container")].readinessProbe.httpGet.path
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].readinessProbe.httpGet.path
           value: "/ready"
       - equal:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent-container")].readinessProbe.httpGet.port
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].readinessProbe.httpGet.port
           value: 80
       - isNotNull:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent-container")].livenessProbe
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].livenessProbe
       - isNotNull:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent-container")].livenessProbe.httpGet
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].livenessProbe.httpGet
       - isNotNull:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent-container")].livenessProbe.httpGet.host
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].livenessProbe.httpGet.host
       - equal:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent-container")].livenessProbe.httpGet.host
-          value: "2345:0425:2CA1::0567:5673:23b5"
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].livenessProbe.httpGet.host
+          value: "::1"
       - isNotNull:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent-container")].livenessProbe.httpGet.path
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].livenessProbe.httpGet.path
       - equal:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent-container")].livenessProbe.httpGet.path
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].livenessProbe.httpGet.path
           value: "/live"
       - equal:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent-container")].livenessProbe.httpGet.port
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].livenessProbe.httpGet.port
           value: 80
       - isNotNull:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent-container")].startupProbe
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].startupProbe
       - isNotNull:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent-container")].startupProbe.httpGet
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].startupProbe.httpGet
       - isNotNull:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent-container")].startupProbe.httpGet.host
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].startupProbe.httpGet.host
       - equal:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent-container")].startupProbe.httpGet.host
-          value: "2345:0425:2CA1::0567:5673:23b5"
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].startupProbe.httpGet.host
+          value: "::1"
       - isNotNull:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent-container")].startupProbe.httpGet.path
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].startupProbe.httpGet.path
       - equal:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent-container")].startupProbe.httpGet.path
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].startupProbe.httpGet.path
           value: "/ready"
       - equal:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent-container")].startupProbe.httpGet.port
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].startupProbe.httpGet.port
           value: 80

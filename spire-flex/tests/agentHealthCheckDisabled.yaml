@@ -41,8 +41,8 @@ tests:
       - isNotNull:
           path: spec.template.spec.containers
       - isNull:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent-container")].readinessProbe
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].readinessProbe
       - isNull:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent-container")].livenessProbe
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].livenessProbe
       - isNull:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent-container")].startupProbe
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].startupProbe

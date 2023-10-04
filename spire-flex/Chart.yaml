@@ -1,6 +1,7 @@
 apiVersion: v2
 name: spire-flex
 description: A Helm chart for Kubernetes
+icon: https://github.com/spiffe/helm-charts-flex/blob/main/spire-helm.svg
 
 # A chart can be either an 'application' or a 'library' chart.
 #
