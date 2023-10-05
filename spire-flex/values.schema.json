@@ -26,11 +26,12 @@
                         },
                         "bindAddress": {
                             "type": "string",
-                            "enum": [ "localhost", "127.0.0.1", "::1" ],
+                            "enum": [ "localhost", "0.0.0.0", "127.0.0.1", "::1" ],
                             "default": "localhost",
                             "title": "The .agent.healtCheck.bindAddress Schema",
                             "examples": [
                                 "localhost",
+                                "0.0.0.0",
                                 "127.0.0.1",
                                 "::1"
                             ]
