@@ -10,6 +10,7 @@ template:
 	$(container_cmd) run -ti --rm -v $(mkfile_path):/apps docker://alpine/helm:3.11.1 template spire-flex 
 
 test:
+	mkdir -p spire-flex/tests/__snapshot__
 	$(container_cmd) run -ti --rm -v $(mkfile_path):/apps docker://alpine/helm:3.11.1 lint spire-flex -f spire-flex/values.yaml
 	$(container_cmd) run -ti --rm -v $(mkfile_path):/apps docker://helmunittest/helm-unittest:3.11.1-0.3.0 spire-flex/ -d -f tests/*.yaml
 
