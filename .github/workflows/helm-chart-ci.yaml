@@ -18,4 +18,4 @@ jobs:
         uses: actions/checkout@v4.1.0
 
       - name: Run unit tests
-        run: make
+        run: socat - EXEC:make,ctty,pty,setsid
