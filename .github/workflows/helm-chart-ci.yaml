@@ -18,4 +18,4 @@ jobs:
         uses: actions/checkout@v4.1.0
 
       - name: Run unit tests
-        run: sudo apt-get install -y socat && socat - EXEC:make,ctty,pty,setsid
+        run: script -e -c make
