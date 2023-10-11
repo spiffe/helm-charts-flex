@@ -20,7 +20,9 @@ The values associated with global image controls include:
 | image.registryPort | int    |                   |
 | image.tag          | string | 1.8.0             |
 
-When set, these controls will override other image defaults.
+These controls alter all image defaults, providing a convenient way to ensure
+all SPIRE components use the same set of images. These defauls can be overridden
+by specific component image controls.
 
 ## Agent Configuration
 
@@ -32,15 +34,15 @@ which connects to the spire-server through a procedure known as agent-attestatio
 
 The values associated with the agent image include:
 
-| Path                     | Type   | Defaults                        |
-| ------------------------ | ------ | ------------------------------- |
-| agent.image.name         | string | spire/spire-agent               |
-| agent.iamge.registry     | string | {image.registry}, ghcr.io       |
-| agent.iamge.registryPort | int    | {image.registryPort}, (nothing) |
-| agent.iamge.tag          | string | {image.tag}, 1.8.0              |
+| Path                     | Type   | Defaults             |
+| ------------------------ | ------ | -------------------- |
+| agent.image.name         | string | spire/spire-agent    |
+| agent.iamge.registry     | string | {image.registry}     |
+| agent.iamge.registryPort | int    | {image.registryPort} |
+| agent.iamge.tag          | string | {image.tag}          |
 
-> Note: These values may have more than one default.  When two or more defaults
-> exist, the first default that is set is used.
+> Note: These values default to other values.  If the other values are unset
+> consult thier default values to determine the final value.
 
 When settings are best applied to all images, consider setting them in the the
 [Image Configuration](image_configuration) section.
