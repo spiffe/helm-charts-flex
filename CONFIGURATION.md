@@ -6,7 +6,56 @@
 [![Development Phase](https://github.com/spiffe/spiffe/blob/main/.img/maturity/dev.svg)](https://github.com/spiffe/spiffe/blob/main/MATURITY.md#development)
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/spiffe)](https://artifacthub.io/packages/search?repo=spiffe)
 
+## Image Configuration
+
+Registries contain container images which are organized by tags.  An organization
+may wish to hold the images in a local repository for better image management
+or to capture local builds of SPIRE when on-site source code management is required.
+
+The values associated with global image controls include:
+
+| Path               | Type   | Default           |
+| ------------------ | ------ | ----------------- |
+| image.registry     | string | ghcr.io           |
+| image.registryPort | int    |                   |
+| image.tag          | string | 1.8.0             |
+
+When set, these controls will override other image defaults.
+
 ## Agent Configuration
+
+### Agent Image Controls
+
+The agent is controlled by a container defintion which pulls the agent's image
+from a container repository. This image contains the spire-agent executable
+which connects to the spire-server through a procedure known as agent-attestation.
+
+The values associated with the agent image include:
+
+| Path                     | Type   | Defaults                        |
+| ------------------------ | ------ | ------------------------------- |
+| agent.image.name         | string | spire/spire-agent               |
+| agent.iamge.registry     | string | {image.registry}, ghcr.io       |
+| agent.iamge.registryPort | int    | {image.registryPort}, (nothing) |
+| agent.iamge.tag          | string | {image.tag}, 1.8.0              |
+
+> Note: These values may have more than one default.  When two or more defaults
+> exist, the first default that is set is used.
+
+When settings are best applied to all images, consider setting them in the the
+[Image Configuration](image_configuration) section.
+
+Here is an example of a customized agent image, where a test agent is being
+used with other non-test components.
+
+```yaml
+agent:
+  image:
+    name: "mycorp/spire-test-agent"
+    registry: "mycorp"
+    registryPort: 8080
+    tag: "latest"
+```
 
 ### Agent Health Checks
 
