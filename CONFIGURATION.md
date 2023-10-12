@@ -37,9 +37,9 @@ The values associated with the agent image include:
 | Path                     | Type   | Defaults             |
 | ------------------------ | ------ | -------------------- |
 | agent.image.name         | string | spire/spire-agent    |
-| agent.iamge.registry     | string | {image.registry}     |
-| agent.iamge.registryPort | int    | {image.registryPort} |
-| agent.iamge.tag          | string | {image.tag}          |
+| agent.image.registry     | string | {image.registry}     |
+| agent.image.registryPort | int    | {image.registryPort} |
+| agent.image.tag          | string | {image.tag}          |
 
 > Note: These values default to other values.  If the other values are unset
 > consult thier default values to determine the final value.

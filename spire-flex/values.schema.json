@@ -120,7 +120,7 @@
                 "image": {
                     "type": "object",
                     "default": {},
-                    "title": "The .agent.healthCheck Schema",
+                    "title": "The .agent.image Schema",
                     "properties": {
                         "name": {
                             "type": "string",
