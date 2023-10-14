@@ -69,22 +69,100 @@
                                 "/i_am_ready"
                             ]
                         }
-                    },
-                    "examples": [{
-                        "enable": false
-                    }, {
-                        "enable": true,
-                        "bindAddress": "localhost",
-                        "bindPort": 80,
-                        "livePath": "/live",
-                        "readyPath": "/ready"
-                    }, {
-                        "enable": true,
-                        "bindAddress": "::1",
-                        "bindPort": 9000,
-                        "livePath": "/live",
-                        "readyPath": "/ready"
-                    }]
+                    }
+                },
+                "keyManager": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The .agent.keyManager Schema",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "enum": [ "custom", "disk", "memory" ],
+                            "default": "disk",
+                            "title": "The .agent.keyManager.type Schema",
+                            "examples": [
+                                "custom",
+                                "disk",
+                                "memory"
+                            ]
+                        },
+                        "disk": {
+                            "type": "object",
+                            "default": {},
+                            "title": "The .agent.keyManager.disk Schema",
+                            "properties": {
+                                "directory": {
+                                    "type": "string",
+                                    "default": "/opt/spire/data/agent/",
+                                    "title": "The .agent.keyManager.type.disk Schema",
+                                    "examples": [
+                                        "/opt/spire/data/agent/",
+                                        "/var/lib/spire-agent/"
+                                    ]
+                                }
+                            }
+                        },
+                        "custom": {
+                            "type": "object",
+                            "default": {},
+                            "title": "The .agent.keyManager.custom Schema",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "default": "customKeyManager",
+                                    "title": "The .agent.keyManager.custom.name Schema",
+                                    "examples": [
+                                        "customKeyManager",
+                                        "coprateKeyManager"
+                                    ]
+                                },
+                                "checksum": {
+                                    "type": "string",
+                                    "title": "The .agent.keyManager.custom.checksum Schema",
+                                    "examples": [
+                                        "1725b8b7071f09f1a15255f0e580bc6c811190902d144f63c0a3dd0f24979c6e"
+                                    ]
+                                },
+                                "cmd": {
+                                    "type": "string",
+                                    "title": "The .agent.keyManager.custom.cmd Schema",
+                                    "examples": [
+                                        "/opt/spire/agent/plugins/customKeyManager"
+                                    ]
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "title": "The .agent.keyManager.custom.data Schema",
+                                    "examples": [
+                                        "/opt/spire/agent/plugins/customKeyManager"
+                                    ]
+                                },
+                                "enabled": {
+                                    "type": "boolean",
+                                    "default": true,
+                                    "title": "The .agent.keyManager.custom.enabled Schema",
+                                    "examples": [
+                                        true,
+                                        false
+                                    ]
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "default": [ ],
+                                    "title": "The .agent.keyManager.custom.data Schema",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "examples": [
+                                        "logging = true",
+                                        "delay = 32",
+                                        "name = \"item\""
+                                    ]
+                                }
+                            }
+                        }
+                    }
                 }
             },
             "examples": [{

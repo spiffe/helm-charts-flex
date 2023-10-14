@@ -1,0 +1,13 @@
+suite: test .agent.keyManager.type custom missing cmd
+templates:
+  - agent-configmap.yaml
+tests:
+  - it: "Should render the correct agent_config file"
+    template: agent-configmap.yaml
+    set:
+      agent.keyManager.type: custom
+      agent.keyManager.custom.checksum: "3f363c538588bbbbbcbe5374274c2c01f0d1387e012b68a22178e3dd790dc26c"
+    asserts:
+      - failedTemplate:
+          errorMessage: "agent.keyManager.custom.cmd must be set"
+

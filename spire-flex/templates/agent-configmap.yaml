@@ -9,6 +9,31 @@ data:
     }
     
     plugins {
+      {{- if eq (default "disk" ((.Values.agent).keyManager).type) "disk" }}
+      KeyManager "disk" {
+        plugin_data {
+          directory = {{ default "/opt/spire/data/agent/" (((.Values.agent).keyManager).disk).directory | quote }}
+        }
+      }
+      {{- end }}
+      {{- if eq ((.Values.agent).keyManager).type "memory" }}
+      KeyManager "memory" {
+      }
+      {{- end }}
+      {{- if eq ((.Values.agent).keyManager).type "custom" }}
+      KeyManager {{ default "customKeyManager" (((.Values.agent).keyManager).custom).name | quote }} {
+        plugin_data {
+          plugin_cmd = {{ required "agent.keyManager.custom.cmd must be set" (((.Values.agent).keyManager).custom).cmd | quote }}
+          plugin_checksum = {{ required "agent.keyManager.custom.checksum must be set" (((.Values.agent).keyManager).custom).checksum | quote }}
+          enabled = {{ ne (((.Values.agent).keyManager).custom).enabled false }}
+          plugin_data {
+            {{- range (((.Values.agent).keyManager).custom).data }}
+            {{ . }}
+            {{- end }}
+          }
+        }
+      }
+      {{- end }}
     }
     {{ if ne (((.Values.agent).healthCheck).enable) false }}
     health_checks {

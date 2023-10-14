@@ -20,6 +20,11 @@ tests:
             }
             
             plugins {
+              KeyManager "disk" {
+                plugin_data {
+                  directory = "/opt/spire/data/agent/"
+                }
+              }
             }
             
             health_checks {
