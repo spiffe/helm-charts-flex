@@ -5,6 +5,39 @@
     "default": {},
     "title": "Helm Flex Schema",
     "properties": {
+        "image": {
+            "type": "object",
+            "default": {},
+            "title": "The .image Schema",
+            "properties": {
+                "registry": {
+                    "type": "string",
+                    "title": "The .image.registry Schema",
+                    "examples": [
+                        "ghcr.io",
+                        "docker",
+                        "company"
+                    ]
+                },
+                "registryPort": {
+                    "type": "integer",
+                    "title": "The .image.registryPort Schema",
+                    "examples": [
+                        9203,
+                        10001
+                    ]
+                },
+                "tag": {
+                    "type": "string",
+                    "title": "The .image.tag Schema",
+                    "examples": [
+                        "latest",
+                        "1.8.0",
+                        "1.7.2"
+                    ]
+                }
+            }
+        },
         "agent": {
             "type": "object",
             "default": {},
@@ -68,6 +101,49 @@
                                 "/ready",
                                 "/i_am_ready"
                             ]
+                        }
+                    }
+                },
+                "image": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The .agent.image Schema",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "title": "The .agent.image.name Schema",
+                            "examples": [
+                                "spire/spire-agent",
+                                "company/spire-agent",
+                                "custom/agent"
+                            ]
+                        },
+                        "registry": {
+                            "type": "string",
+                            "title": "The .agent.image.registry Schema",
+                            "examples": [
+                                "ghcr.io",
+                                "docker",
+                                "company"
+                            ]
+                        },
+                        "registryPort": {
+                            "type": "integer",
+                            "title": "The .agent.image.registryPort Schema",
+                            "examples": [
+                                9203,
+                                10001
+                            ]
+                        },
+                        "tag": {
+                            "type": "string",
+                            "title": "The .agent.image.tag Schema",
+                            "examples": [
+                                "latest",
+                                "1.8.0",
+                                "1.7.2"
+                            ]
+
                         }
                     }
                 },
@@ -164,66 +240,7 @@
                         }
                     }
                 }
-            },
-            "examples": [{
-                "healthCheck": { 
-                }
-            }, {
-                "healthCheck": {
-                    "enable": false
-                }
-            }, {
-                "healthCheck": {
-                    "enable": true,
-                    "bindAddress": "localhost",
-                    "bindPort": 80,
-                    "livePath": "/live",
-                    "readyPath": "/ready"
-                }
-            }, {
-                "healthCheck": {
-                    "enable": true,
-                    "bindAddress": "::1",
-                    "bindPort": 9000,
-                    "livePath": "/live",
-                    "readyPath": "/ready"
-                }
-            }]
-        }
-    },
-    "examples": [{
-        "agent": {
-        }
-    }, {
-        "agent": {
-            "healthCheck": {
             }
         }
-    }, {
-        "agent": {
-            "healthCheck": {
-                "enable": false
-            }
-        }
-    }, {
-        "agent": {
-            "healthCheck": {
-                "enable": true,
-                "bindAddress": "localhost",
-                "bindPort": 80,
-                "livePath": "/live",
-                "readyPath": "/ready"
-            }
-        }
-    }, {
-        "agent": {
-            "healthCheck": {
-                "enable": true,
-                "bindAddress": "::1",
-                "bindPort": 9000,
-                "livePath": "/live",
-                "readyPath": "/ready"
-            }
-        }
-    }]
+    }
 }
