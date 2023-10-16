@@ -60,3 +60,16 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Returns the agent image string.
+*/}}
+{{- define "spire-flex.agent.image" -}}
+{{ join "" (list 
+       (coalesce ((.Values.agent).image).registry (.Values.image).registry "ghcr.io")
+       (ternary "" ":" (empty (coalesce ((.Values.agent).image).registryPort (.Values.image).registryPort)))
+       (coalesce ((.Values.agent).image).registryPort (.Values.image).registryPort)
+       "/" (coalesce ((.Values.agent).image).name "spiffe/spire-agent") ":"
+       (coalesce ((.Values.agent).image).tag (.Values.image).tag .Chart.AppVersion)
+   ) | quote }}
+{{- end }}
