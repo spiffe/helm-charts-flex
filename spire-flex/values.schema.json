@@ -10,6 +10,15 @@
             "default": {},
             "title": "The .agent Schema",
             "properties": {
+                "configFile": {
+                    "type": "string",
+                    "default": "/opt/spire/conf/agent/agent.conf",
+                    "title": "The .agent.configFile Schema",
+                    "examples": [
+                        "/run/spire/config/agent.conf",
+                        "/etc/spire/agent.conf"
+                    ]
+                },
                 "healthCheck": {
                     "type": "object",
                     "default": {},
@@ -69,83 +78,9 @@
                                 "/i_am_ready"
                             ]
                         }
-                    },
-                    "examples": [{
-                        "enable": false
-                    }, {
-                        "enable": true,
-                        "bindAddress": "localhost",
-                        "bindPort": 80,
-                        "livePath": "/live",
-                        "readyPath": "/ready"
-                    }, {
-                        "enable": true,
-                        "bindAddress": "::1",
-                        "bindPort": 9000,
-                        "livePath": "/live",
-                        "readyPath": "/ready"
-                    }]
+                    }
                 }
-            },
-            "examples": [{
-                "healthCheck": { 
-                }
-            }, {
-                "healthCheck": {
-                    "enable": false
-                }
-            }, {
-                "healthCheck": {
-                    "enable": true,
-                    "bindAddress": "localhost",
-                    "bindPort": 80,
-                    "livePath": "/live",
-                    "readyPath": "/ready"
-                }
-            }, {
-                "healthCheck": {
-                    "enable": true,
-                    "bindAddress": "::1",
-                    "bindPort": 9000,
-                    "livePath": "/live",
-                    "readyPath": "/ready"
-                }
-            }]
-        }
-    },
-    "examples": [{
-        "agent": {
-        }
-    }, {
-        "agent": {
-            "healthCheck": {
             }
         }
-    }, {
-        "agent": {
-            "healthCheck": {
-                "enable": false
-            }
-        }
-    }, {
-        "agent": {
-            "healthCheck": {
-                "enable": true,
-                "bindAddress": "localhost",
-                "bindPort": 80,
-                "livePath": "/live",
-                "readyPath": "/ready"
-            }
-        }
-    }, {
-        "agent": {
-            "healthCheck": {
-                "enable": true,
-                "bindAddress": "::1",
-                "bindPort": 9000,
-                "livePath": "/live",
-                "readyPath": "/ready"
-            }
-        }
-    }]
+    }
 }
