@@ -15,6 +15,9 @@ spec:
       containers:
         - name: {{ $.Release.Name }}-agent
           image: {{ include "spire-flex.agent.image" . }}
+          args:
+            - -config
+            - "{{ default "/etc/spire" ((.Values.agent).configVolumeMountPath) }}/agent_conf"
           {{- if ne (((.Values.agent).healthCheck).enable) false }}
           livenessProbe:
             httpGet:
@@ -31,4 +34,12 @@ spec:
               host: {{ default "localhost" (((.Values.agent).healthCheck).bindAddress) | quote }}
               port: {{ default 80 (((.Values.agent).healthCheck).bindPort) }}
               path: {{ default "/ready" (((.Values.agent).healthCheck).readyPath) | quote }}
-         {{- end }}
+          {{- end }}
+          volumeMounts:
+            - name: config
+              mountPath: {{ default "/etc/spire" ((.Values.agent).configVolumeMountPath) | quote }}
+              readOnly: true
+      volumes:
+        - name: config
+          configMap:
+            name: {{ $.Release.Name }}-agent-config
