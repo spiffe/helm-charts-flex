@@ -53,7 +53,9 @@ $ helm install spire-demo spire-flex-0.1.0.tgz --file values.yaml
 We recommend that you replace the values "spire-demo" and "demo.trust.domain"
 with values specific to your environment.
 
-For details of the configuration items, see [Configuration](#configuration).
+Other [configuration](#configuration) details are covered in this document, with
+specific [configuration settings](https://github.com/spiffe/helm-charts-flex/tree/main/spire-flex/CONFIGURAITON.md)
+in the configuration manual.
 
 ### Tiered Installation
 
@@ -85,7 +87,7 @@ While options can be passed on the command line, the typical deployment uses
 a values.yaml file.
 
 Details of how to perform specific common configuration tasks are part of the
-user manual (yet to be written).
+[configuration manual]()
 
 ## Reconfiguration
 
