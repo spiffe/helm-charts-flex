@@ -20,7 +20,7 @@ spec:
             - {{ default "/opt/spire/conf/agent/agent.conf" ($.Values.agent).configFile }}
           volumeMounts:
             - name: {{ $.Release.Name }}-agent-config-volume
-              mountPath: {{ default "/opt/spire/conf/agent/agent.conf" ($.Values.agent).configFile }}
+              mountPath: {{ printf "%s/" (dir (default "/opt/spire/conf/agent/agent.conf" ($.Values.agent).configFile)) | quote }}
               readOnly: true
           
           {{- if ne (((.Values.agent).healthCheck).enable) false }}

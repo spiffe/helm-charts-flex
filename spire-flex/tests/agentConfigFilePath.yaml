@@ -23,7 +23,7 @@ tests:
           path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].volumeMounts[?(@.name == "RELEASE-NAME-agent-config-volume")]
       - equal:
           path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].volumeMounts[?(@.name == "RELEASE-NAME-agent-config-volume")].mountPath
-          value: "/etc/spire/agent_goofy"
+          value: "/etc/spire/"
       - equal:
           path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].volumeMounts[?(@.name == "RELEASE-NAME-agent-config-volume")].readOnly
           value: true
