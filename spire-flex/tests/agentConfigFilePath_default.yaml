@@ -17,13 +17,13 @@ tests:
           path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].args[1]
           value: "/opt/spire/conf/agent/agent.conf"
       - isNotNull:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].volumeMounts[?(@.name == "RELEASE-NAME-agent-config-volume")]
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].volumeMounts[?(@.name == "RELEASE-NAME-agent-config")]
       - equal:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].volumeMounts[?(@.name == "RELEASE-NAME-agent-config-volume")].mountPath
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].volumeMounts[?(@.name == "RELEASE-NAME-agent-config")].mountPath
           value: "/opt/spire/conf/agent/"
       - equal:
-          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].volumeMounts[?(@.name == "RELEASE-NAME-agent-config-volume")].readOnly
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].volumeMounts[?(@.name == "RELEASE-NAME-agent-config")].readOnly
           value: true
       - equal:
-          path: spec.template.spec.volumes[?(@.name == "RELEASE-NAME-agent-config-volume")].configMap.name
+          path: spec.template.spec.volumes[?(@.name == "RELEASE-NAME-agent-config")].configMap.name
           value: "RELEASE-NAME-agent-config"
