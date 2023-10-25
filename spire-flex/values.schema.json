@@ -43,6 +43,15 @@
             "default": {},
             "title": "The .agent Schema",
             "properties": {
+                "configFile": {
+                    "type": "string",
+                    "default": "/opt/spire/conf/agent/agent.conf",
+                    "title": "The .agent.configFile Schema",
+                    "examples": [
+                        "/run/spire/config/agent.conf",
+                        "/etc/spire/agent.conf"
+                    ]
+                },
                 "healthCheck": {
                     "type": "object",
                     "default": {},
