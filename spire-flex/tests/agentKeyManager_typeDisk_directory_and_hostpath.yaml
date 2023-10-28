@@ -1,4 +1,4 @@
-suite: test .agent.keyManager.type disk with directory
+suite: test .agent.keyManager.type disk with directory and hostPath
 templates:
   - agent-configmap.yaml
   - agent-daemonset.yaml
@@ -8,6 +8,7 @@ tests:
     set:
       agent.keyManager.type: disk
       agent.keyManager.disk.directory: "/var/lib/spire-agent/"
+      agent.hostpath.keyManagerDir: "/opt/lib/spire-agent/"
     asserts:
       - containsDocument:
           apiVersion: "v1"
@@ -42,6 +43,7 @@ tests:
     set:
       agent.keyManager.type: disk
       agent.keyManager.disk.directory: "/var/lib/spire-agent/"
+      agent.hostPath.keyManagerDir: "/opt/lib/spire-agent/"
     asserts:
       - containsDocument:
           apiVersion: "apps/v1"
@@ -50,7 +52,7 @@ tests:
           namespace: "NAMESPACE"
       - equal:
           path: spec.template.spec.volumes[?(@.name == "RELEASE-NAME-agent-keymanager")].hostPath.path
-          value: "/var/lib/spire-agent/"
+          value: "/opt/lib/spire-agent/"
       - equal:
           path: spec.template.spec.volumes[?(@.name == "RELEASE-NAME-agent-keymanager")].hostPath.type
           value: "Directory"
@@ -60,6 +62,7 @@ tests:
     set:
       agent.keyManager.type: disk
       agent.keyManager.disk.directory: "/var/lib/spire-agent/"
+      agent.hostPath.keyManagerDir: "/opt/lib/spire-agent/"
     asserts:
       - containsDocument:
           apiVersion: "apps/v1"

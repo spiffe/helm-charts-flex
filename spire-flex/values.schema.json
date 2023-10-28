@@ -113,6 +113,21 @@
                         }
                     }
                 },
+                "hostPath": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The .agent.hostPath Schema",
+                    "properties": {
+                        "keyManagerDir": {
+                            "type": "string",
+                            "title": "The .agent.hostPath.keyManager Schema",
+                            "examples": [
+                                "/opt/spire/data/agent/",
+                                "/var/lib/spire/agent/"
+                            ]
+                        }
+                    }
+                },
                 "image": {
                     "type": "object",
                     "default": {},

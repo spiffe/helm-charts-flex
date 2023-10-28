@@ -1,6 +1,7 @@
 suite: test .agent.keyManager.type disk
 templates:
   - agent-configmap.yaml
+  - agent-daemonset.yaml
 tests:
   - it: "Should render the correct agent_config file"
     template: agent-configmap.yaml
@@ -34,3 +35,36 @@ tests:
               ready_path = "/ready"
             }
 
+  - it: "The agent daemonset has a volume for the keymanager when the type is set to disk"
+    template: agent-daemonset.yaml
+    set:
+      agent.keyManager.type: disk
+    asserts:
+      - containsDocument:
+          apiVersion: "apps/v1"
+          kind: "DaemonSet"
+          name: "RELEASE-NAME-agent-daemonset"
+          namespace: "NAMESPACE"
+      - equal:
+          path: spec.template.spec.volumes[?(@.name == "RELEASE-NAME-agent-keymanager")].hostPath.path
+          value: "/opt/spire/data/agent"
+      - equal:
+          path: spec.template.spec.volumes[?(@.name == "RELEASE-NAME-agent-keymanager")].hostPath.type
+          value: "Directory"
+
+  - it: "The agent daemonset has a volumemount for the keymanager volume when the type is set to disk"
+    template: agent-daemonset.yaml
+    set:
+      agent.keyManager.type: disk
+    asserts:
+      - containsDocument:
+          apiVersion: "apps/v1"
+          kind: "DaemonSet"
+          name: "RELEASE-NAME-agent-daemonset"
+          namespace: "NAMESPACE"
+      - equal:
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].volumeMounts[?(@.name == "RELEASE-NAME-agent-keymanager")].mountPath
+          value: "/opt/spire/data/agent"
+      - equal:
+          path: spec.template.spec.containers[?(@.name == "RELEASE-NAME-agent")].volumeMounts[?(@.name == "RELEASE-NAME-agent-keymanager")].readOnly
+          value: false

@@ -7,16 +7,37 @@
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/spiffe)](https://artifacthub.io/packages/search?repo=spiffe)
 
 
-## File locations
+## In-Pod locations
 
-Some file in the spire deployment can be relocated.  Relocating files may assist
+Some files in the spire deployment can be relocated.  Relocating files may assist
 in avoiding collisions when installing multiple SPIRE instances on the same
-hardware, or may place files into locations confroming with your file placement
+hardware, or may place files into locations conforming with your file placement
 standards.  Below is a list of relocatable files and their default locations.
 
-| File                          | Config Path      | Default Location           | 
-| ----------------------------- | ---------------- | -------------------------- |
-| Agent Configuration File      | agent.configFile | /opt/spire/conf/agent.conf |
+| File                          | Config Path         | Default Location           | 
+| ----------------------------- | ------------------- | -------------------------- |
+| Agent Configuration File      | agent.configFile    | /opt/spire/conf/agent.conf |
+| Agent Keymanager Directory\*  | agent.keyManagerDir | /opt/spire/data/agent/     |
+
+> Note: Items marked with an asterisk (\*) are optional and will only be used
+  when other configuration setttings activate them.
+
+Changing the location of a file will automatically update the other components
+to expect the file in its specified location.
+
+## In-Node Locations
+
+Some files that map to the nost deployment can be relocated.  Relocating files
+may assist in avoiding collisions when isntalling multiple SPIRE instances on the
+same node, or may place files into locations conforming with your file placement
+standards.  Below is a list of relocatable files and their default locations.
+
+| File                          | Config Path                  | Default Location           | 
+| ----------------------------- | ---------------------------- | -------------------------- |
+| Agent Keymanager Directory\*  | agent.hostPath.keyManagerDir | {agent.keyManagerDir}      |
+
+> Note: Items marked with an asterisk (\*) are optional and will only be used
+  when other configuration setttings activate them.
 
 Changing the location of a file will automatically update the other components
 to expect the file in its specified location.
@@ -249,9 +270,10 @@ coordination.
 > Note: These values only effect the configuration when the **agent.keyManager.type**
 > has the value "disk".
 
-| Path                             | Type   | Default                  |
-| -------------------------------- | ------ | ------------------------ |
-| agent.keyManager.disk.directory  | string | "/opt/spire/data/agent/" |
+| Path                             | Type   | Default                           |
+| -------------------------------- | ------ | --------------------------------- |
+| agent.keyManager.disk.directory  | string | "/opt/spire/data/agent/"          |
+| agent.hostPath.keyManagerDir     | string | {agent.keyManager.disk.directory} |
 
 The **agent.keyManager.data.directory** is the path that will hold the disk
 based keyManager.  It is mapped to a volume, and the volume can be controlled
