@@ -15,12 +15,17 @@ tests:
           name: "RELEASE-NAME-agent-config"
           namespace: "NAMESPACE"
       - equal:
-          path: $['data']['agent.config']
+          path: $["data"]["agent.conf"]
           value: |
             agent {
             }
             
             plugins {
+              KeyManager "disk" {
+                plugin_data {
+                  directory = "/opt/spire/data/agent/"
+                }
+              }
             }
             
             health_checks {

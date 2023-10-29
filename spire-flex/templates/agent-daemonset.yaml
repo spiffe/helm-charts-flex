@@ -17,12 +17,16 @@ spec:
           image: {{ include "spire-flex.agent.image" . }}
           args:
             - "-config"
-            - {{ default "/opt/spire/conf/agent/agent.conf" ($.Values.agent).configFile }}
+            - {{ default "/opt/spire/conf/agent/agent.conf" (.Values.agent).configFile | quote }} 
           volumeMounts:
             - name: {{ $.Release.Name }}-agent-config
               mountPath: {{ printf "%s/" (dir (default "/opt/spire/conf/agent/agent.conf" ($.Values.agent).configFile)) | quote }}
               readOnly: true
-          
+          {{- if eq (default "disk" ((.Values.agent).keyManager).type) "disk" }}
+            - name: {{ $.Release.Name }}-agent-keymanager
+              mountPath: {{ default "/opt/spire/data/agent" (((.Values.agent).keyManager).disk).directory | quote }}
+              readOnly: false
+          {{- end }}
           {{- if ne (((.Values.agent).healthCheck).enable) false }}
           livenessProbe:
             httpGet:
@@ -44,3 +48,9 @@ spec:
         - name: {{ $.Release.Name }}-agent-config
           configMap:
             name: {{ $.Release.Name }}-agent-config
+        {{- if eq (default "disk" ((.Values.agent).keyManager).type) "disk" }}
+        - name: {{ $.Release.Name }}-agent-keymanager
+          hostPath:
+            path: {{ coalesce ((.Values.agent).hostPath).keyManagerDir (default "/opt/spire/data/agent" (((.Values.agent).keyManager).disk).directory) | quote }}
+            type: "Directory"
+        {{- end }}
