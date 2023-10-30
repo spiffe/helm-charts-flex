@@ -50,7 +50,7 @@ tests:
           value: "/opt/spire/data/agent"
       - equal:
           path: spec.template.spec.volumes[?(@.name == "RELEASE-NAME-agent-keymanager")].hostPath.type
-          value: "Directory"
+          value: "DirectoryOrCreate"
 
   - it: "The agent daemonset has a volumemount for the keymanager volume when the type is set to disk"
     template: agent-daemonset.yaml
