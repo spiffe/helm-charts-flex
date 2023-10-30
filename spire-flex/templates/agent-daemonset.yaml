@@ -52,5 +52,5 @@ spec:
         - name: {{ $.Release.Name }}-agent-keymanager
           hostPath:
             path: {{ coalesce ((.Values.agent).hostPath).keyManagerDir (default "/opt/spire/data/agent" (((.Values.agent).keyManager).disk).directory) | quote }}
-            type: "Directory"
+            type: "DirectoryOrCreate"
         {{- end }}
