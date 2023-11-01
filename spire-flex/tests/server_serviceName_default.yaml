@@ -1,14 +1,12 @@
-suite: test .agent.keyManager.type custom enabled off
+suite: test server.serviceName (default)
+set:
+  Release.Name: devcluster
 templates:
   - agent-configmap.yaml
+  - server-service.yaml
 tests:
-  - it: "Should render the correct agent_config file"
+  - it: "Should render with server_address = \"RELEASE-NAME-server\""
     template: agent-configmap.yaml
-    set:
-      agent.keyManager.type: custom
-      agent.keyManager.custom.cmd: "/usr/bin/customKeyManager"
-      agent.keyManager.custom.checksum: "3f363c538588bbbbbcbe5374274c2c01f0d1387e012b68a22178e3dd790dc26c"
-      agent.keyManager.custom.enabled: false
     asserts:
       - containsDocument:
           apiVersion: "v1"
@@ -22,15 +20,11 @@ tests:
               server_address = "RELEASE-NAME-server"
               server_port = 8081
             }
-
+            
             plugins {
-              KeyManager "customKeyManager" {
+              KeyManager "disk" {
                 plugin_data {
-                  plugin_cmd = "/usr/bin/customKeyManager"
-                  plugin_checksum = "3f363c538588bbbbbcbe5374274c2c01f0d1387e012b68a22178e3dd790dc26c"
-                  enabled = false
-                  plugin_data {
-                  }
+                  directory = "/opt/spire/data/agent/"
                 }
               }
             }
@@ -43,3 +37,19 @@ tests:
               ready_path = "/ready"
             }
 
+  - it: "Should render with name = \"RELEASE-NAME-server\""
+    template: server-service.yaml
+    asserts:
+      - containsDocument:
+          apiVersion: "v1"
+          kind: "Service"
+          name: "RELEASE-NAME-server"
+          namespace: "NAMESPACE"
+      - equal:
+          path: "metadata.name"
+          value: "RELEASE-NAME-server"
+      - isNotNull:
+          path: "spec.ports[?(@.port == 8081)]"
+      - equal:
+          path: "spec.ports[?(@.port == 8081)].protocol"
+          value: "TCP"

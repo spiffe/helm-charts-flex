@@ -17,6 +17,8 @@ tests:
           path: $["data"]["agent.conf"]
           value: |
             agent {
+              server_address = "RELEASE-NAME-server"
+              server_port = 8081
             }
 
             plugins {
