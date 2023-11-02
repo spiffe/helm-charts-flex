@@ -265,6 +265,31 @@
                     }
                 }
             }
+        },
+        "server": {
+            "type": "object",
+            "default": {},
+            "title": "The .server Schema",
+            "properties": {
+                "serviceName": {
+                    "type": "string",
+                    "default": "RELEASE-NAME-server",
+                    "title": "The .server.serviceName Schema",
+                    "examples": [
+                        "/run/spire/config/agent.conf",
+                        "/etc/spire/agent.conf"
+                    ]
+                },
+                "servicePort": {
+                    "type": "integer",
+                    "default": 8081,
+                    "title": "The .server.servicePort Schema",
+                    "examples": [
+                        8081,
+                        8443
+                    ]
+                }
+            }
         }
     }
 }

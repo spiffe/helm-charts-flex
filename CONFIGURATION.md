@@ -6,6 +6,14 @@
 [![Development Phase](https://github.com/spiffe/spiffe/blob/main/.img/maturity/dev.svg)](https://github.com/spiffe/spiffe/blob/main/MATURITY.md#development)
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/spiffe)](https://artifacthub.io/packages/search?repo=spiffe)
 
+## Component Names
+
+Some componets support renaming.  When renaming components, we highly recommend
+that you select names that would not conflict with additional chart installations.
+
+| Component                     | Config Path         | Default Value           | 
+| ----------------------------- | ------------------- | ----------------------- |
+| Server Service                | server.serviceName  | { Release.Name }-server |
 
 ## In-Pod locations
 
@@ -280,3 +288,23 @@ based keyManager.  It is mapped to a volume, and the volume can be controlled
 to be persistent or ephemeral. Its purpose is to provide the directory to hold
 previous identities from node attestation, to prevent a full node re-attestation
 should the SPIRE agent restart.
+
+## Server Configuration
+
+The server is accessed through a Kubernetes Service, which distributes server
+connections to one more more backend server instances.  The backend instances
+then handle the requests, replying directly to the agents via client sockets.
+
+### Server Service Settings
+
+The server service provides a single DNS name referenced point of access for
+all spire server instances within a deployment.  Connections made to this
+Kubernetes service are relayed to one of the backing server instances.
+
+The values associated with the service settigns include:
+
+| Path                     | Type   | Defaults                |
+| ------------------------ | ------ | ----------------------- |
+| server.serviceName       | string | { Release.Name }-server |
+| server.servicePort       | int    | 8081                    |
+

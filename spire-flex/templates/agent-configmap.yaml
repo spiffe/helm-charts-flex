@@ -10,6 +10,8 @@ data:
   agent.conf: |
   {{ end }}
     agent {
+      server_address = {{ default (printf "%s-server" .Release.Name) (.Values.server).serviceName | quote }}
+      server_port = {{ default 8081 (.Values.server).servicePort }}
     }
     
     plugins {
