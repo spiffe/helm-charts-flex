@@ -6,9 +6,29 @@
 [![Development Phase](https://github.com/spiffe/spiffe/blob/main/.img/maturity/dev.svg)](https://github.com/spiffe/spiffe/blob/main/MATURITY.md#development)
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/spiffe)](https://artifacthub.io/packages/search?repo=spiffe)
 
+## Required Settings
+
+Some settings are required, but have no defaults.  The settings should be chosen
+to match your deployment environment.  We encourage you to take a short moment
+to select values that make sense for your enviornment, for example, if creating
+a prototype, set the **trustdomain** to 'prototype.department.company.com'.
+
+| Component          | Config Path | Example Values          | 
+| ------------------ | ----------- | ----------------------- |
+| SPIRE Trust Domain | trustdomain | propulsion.yoyodyne.com |
+
+## Global Settings
+
+Some settings apply to the entire installation.  To clarify they are not a
+subcomponent of the agent or server, they are top-level settings.
+
+| Component          | Config Path | Example Values          | 
+| ------------------ | ----------- | ----------------------- |
+| SPIRE Trust Domain | trustdomain | propulsion.yoyodyne.com |
+
 ## Component Names
 
-Some componets support renaming.  When renaming components, we highly recommend
+Some components support renaming.  When renaming components, we highly recommend
 that you select names that would not conflict with additional chart installations.
 
 | Component                     | Config Path         | Default Value           | 

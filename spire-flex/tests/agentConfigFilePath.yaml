@@ -7,6 +7,7 @@ tests:
     template: agent-daemonset.yaml
     set:
       agent.configFile: "/etc/spire/agent_goofy"
+      trustdomain: "dev.mycorp.com"
     asserts:
       - containsDocument:
           apiVersion: "apps/v1"
@@ -34,6 +35,7 @@ tests:
     template: agent-configmap.yaml
     set:
       agent.configFile: "/etc/spire/agent_goofy"
+      trustdomain: "dev.mycorp.com"
     asserts:
       - containsDocument:
           apiVersion: "v1"

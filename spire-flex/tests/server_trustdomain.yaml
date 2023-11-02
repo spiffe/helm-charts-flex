@@ -1,12 +1,11 @@
-suite: test .agent.keyManager.type memory
+suite: test .trustdomain prod.yoyodyne.com
 templates:
   - agent-configmap.yaml
 tests:
-  - it: "Should render the correct agent_config file"
+  - it: ".trustdomain set to prod.yoyodyne.com sets trust_domain = \"prod.yoyodyne.com\""
     template: agent-configmap.yaml
     set:
-      agent.keyManager.type: "memory"
-      trustdomain: "dev.mycorp.com"
+      trustdomain: "prod.yoyodyne.com"
     asserts:
       - containsDocument:
           apiVersion: "v1"
@@ -19,11 +18,14 @@ tests:
             agent {
               server_address = "RELEASE-NAME-server"
               server_port = 8081
-              trust_domain = "dev.mycorp.com"
+              trust_domain = "prod.yoyodyne.com"
             }
-
+            
             plugins {
-              KeyManager "memory" {
+              KeyManager "disk" {
+                plugin_data {
+                  directory = "/opt/spire/data/agent/"
+                }
               }
             }
             

@@ -41,7 +41,7 @@ coordinating the other clusters.
 To install a cluster named "spire-demo" with a trust domain of "demo.trust.domain"
 
 ```bash
-$ helm install spire-demo spire-flex-0.1.0.tgz --set trustDoman=demo.company.com
+$ helm install spire-demo spire-flex-0.1.0.tgz --set trustdomain=demo.company.com
 ``` 
 
 or the preferred approach of putting the values in a values.yaml file
@@ -61,9 +61,9 @@ To install a tiered cluster setup, one must install one coordnating "root" clust
 and one or more "nested" clusters.
 
 ```bash
-$ helm install spire-demo-root spire-flex-0.1.0.tgz --set trustDoman=demo.company.com --set type=root
-$ helm install spire-demo-nested1 spire-flex-0.1.0.tgz --set trustDoman=demo.company.com --set type=nested
-$ helm install spire-demo-nested2 spire-flex-0.1.0.tgz --set trustDoman=demo.company.com --set type=nested
+$ helm install spire-demo-root spire-flex-0.1.0.tgz --set trustdomain=demo.company.com --set type=root
+$ helm install spire-demo-nested1 spire-flex-0.1.0.tgz --set trustdomain=demo.company.com --set type=nested
+$ helm install spire-demo-nested2 spire-flex-0.1.0.tgz --set trustdomain=demo.company.com --set type=nested
 ``` 
 
 or the preferred approach of putting the values in a values.yaml file
@@ -93,7 +93,7 @@ To change values in an already deployed cluster, one uses the helm upgrade
 command with the new values.
 
 ```bash
-$ helm upgrade spire-demo spire-flex-0.1.0.tgz --set trustDomain=dev.company.com
+$ helm upgrade spire-demo spire-flex-0.1.0.tgz --set trustdomain=dev.company.com
 ```
 
 or the preferred approach of putting the values in a values.yaml file
