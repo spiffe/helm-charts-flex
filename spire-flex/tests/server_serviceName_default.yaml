@@ -7,6 +7,8 @@ templates:
 tests:
   - it: "Should render with server_address = \"RELEASE-NAME-server\""
     template: agent-configmap.yaml
+    set:
+      trustdomain: "dev.mycorp.com"
     asserts:
       - containsDocument:
           apiVersion: "v1"
@@ -19,6 +21,7 @@ tests:
             agent {
               server_address = "RELEASE-NAME-server"
               server_port = 8081
+              trust_domain = "dev.mycorp.com"
             }
             
             plugins {
@@ -39,6 +42,8 @@ tests:
 
   - it: "Should render with name = \"RELEASE-NAME-server\""
     template: server-service.yaml
+    set:
+      trustdomain: "dev.mycorp.com"
     asserts:
       - containsDocument:
           apiVersion: "v1"

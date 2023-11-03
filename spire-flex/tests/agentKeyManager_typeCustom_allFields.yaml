@@ -15,6 +15,7 @@ tests:
         "encryption = true",
         "rotationMin = 35",
       ]
+      trustdomain: "dev.mycorp.com"
     asserts:
       - containsDocument:
           apiVersion: "v1"
@@ -27,6 +28,7 @@ tests:
             agent {
               server_address = "RELEASE-NAME-server"
               server_port = 8081
+              trust_domain = "dev.mycorp.com"
             }
 
             plugins {

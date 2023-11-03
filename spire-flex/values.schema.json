@@ -38,6 +38,14 @@
                 }
             }
         },
+        "trustdomain": {
+            "type": "string",
+            "title": "The .trustdomain Schema",
+            "examples": [
+                "yoyodyne.com",
+                "dev.tyrellcorp.com"
+            ]
+        },
         "agent": {
             "type": "object",
             "default": {},

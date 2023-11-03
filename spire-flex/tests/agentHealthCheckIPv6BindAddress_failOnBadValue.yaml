@@ -9,6 +9,7 @@ tests:
     template: agent-configmap.yaml
     set:
       agent.healthCheck.bindAddress: "2324:2930::2349:9702"
+      trustdomain: "dev.mycorp.com"
     asserts:
       - failedTemplate:
           errorMessage: | 

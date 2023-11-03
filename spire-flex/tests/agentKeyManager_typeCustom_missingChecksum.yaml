@@ -7,6 +7,7 @@ tests:
     set:
       agent.keyManager.type: custom
       agent.keyManager.custom.cmd: "/usr/bin/customKeyManager"
+      trustdomain: "dev.mycorp.com"
     asserts:
       - failedTemplate:
           errorMessage: "agent.keyManager.custom.checksum must be set"

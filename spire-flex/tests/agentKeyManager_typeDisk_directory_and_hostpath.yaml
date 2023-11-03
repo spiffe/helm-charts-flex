@@ -9,6 +9,7 @@ tests:
       agent.keyManager.type: disk
       agent.keyManager.disk.directory: "/var/lib/spire-agent/"
       agent.hostpath.keyManagerDir: "/opt/lib/spire-agent/"
+      trustdomain: "dev.mycorp.com"
     asserts:
       - containsDocument:
           apiVersion: "v1"
@@ -21,6 +22,7 @@ tests:
             agent {
               server_address = "RELEASE-NAME-server"
               server_port = 8081
+              trust_domain = "dev.mycorp.com"
             }
 
             plugins {
@@ -46,6 +48,7 @@ tests:
       agent.keyManager.type: disk
       agent.keyManager.disk.directory: "/var/lib/spire-agent/"
       agent.hostPath.keyManagerDir: "/opt/lib/spire-agent/"
+      trustdomain: "dev.mycorp.com"
     asserts:
       - containsDocument:
           apiVersion: "apps/v1"
@@ -65,6 +68,7 @@ tests:
       agent.keyManager.type: disk
       agent.keyManager.disk.directory: "/var/lib/spire-agent/"
       agent.hostPath.keyManagerDir: "/opt/lib/spire-agent/"
+      trustdomain: "dev.mycorp.com"
     asserts:
       - containsDocument:
           apiVersion: "apps/v1"
