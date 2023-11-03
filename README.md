@@ -85,7 +85,7 @@ While options can be passed on the command line, the typical deployment uses
 a values.yaml file.
 
 Details of how to perform specific common configuration tasks are part of the
-user manual (yet to be written).
+[user manual](https://github.com/spiffe/helm-charts-flex/blob/main/spire-flex/CONFIGURATION.md).
 
 ## Reconfiguration
 
